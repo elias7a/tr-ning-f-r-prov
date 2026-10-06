@@ -1,0 +1,27 @@
+<!doctype html><html lang="sv"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Prov träning 7 A</title><style>
+body{font-family:Arial;margin:0;background:linear-gradient(135deg,#dbeafe,#ede9fe);min-height:100vh;color:#172033}.box{max-width:800px;margin:30px auto;padding:30px;background:white;border-radius:22px;box-shadow:0 10px 30px #0002}button{padding:12px 18px;margin:6px;border:0;border-radius:10px;background:#4f46e5;color:white;font-size:16px;cursor:pointer}h1{color:#312e81}.q{font-size:20px;font-weight:bold}.opt{display:block;width:100%;text-align:left;background:#eef2ff;color:#172033}.hide{display:none}input{width:100%;padding:12px;box-sizing:border-box;font-size:16px;border:2px solid #ccd;border-radius:10px}
+</style></head><body><div class="box"><h1>Prov träning 7 A 🧠</h1><p>Träna på idrott och hälsa.</p><div id="start"><button onclick="start()">Starta blandat prov</button></div><div id="quiz" class="hide"><p id="nr"></p><p class="q" id="q"></p><div id="a"></div><input id="text" class="hide" placeholder="Skriv ditt svar här"><button onclick="next()">Nästa</button></div><div id="result" class="hide"><h2>Klart! 🎉</h2><p id="score"></p><button onclick="location.reload()">Träna igen</button></div></div>
+<script>
+const qs=[
+["Varför värmer man upp?","För att höja pulsen, värma musklerna, förbättra rörligheten och minska skaderisken."],
+["Hur länge bör ett skolbarn vara fysiskt aktivt varje dag?","60 minuter"],
+["Vad kallas hjärtslag per minut?","Puls"],
+["Vad är formeln för maxpuls?","220 - ålder"],
+["Vilken vilopuls är vanlig ungefär?","60–80 slag per minut"],
+["Vilket intervall av maxpuls rekommenderas för konditionsträning?","50–70 procent"],
+["Varför ökar pulsen när du tränar?","Musklerna behöver mer syre och hjärtat pumpar blod snabbare."],
+["Vad tränar kondition? Ge ett exempel.","Löpning, cykling eller fotboll."],
+["Vad tränar styrka? Ge ett exempel.","Gymnastik, kastgrenar eller kortdistanslöpning."],
+["Vad förbättrar rörlighet?","Flexibilitet och smidighet och det kan minska skaderisken."],
+["Hur kan knäskador i fotboll förebyggas?","Genom att stärka musklerna runt knät och träna motoriska färdigheter."],
+["Vad är lilla kretsloppet?","Hjärtat till lungorna och tillbaka till hjärtat för att syresätta blodet."],
+["Vad är stora kretsloppet?","Syresatt blod går från hjärtat ut till kroppen."],
+["Varför är träning viktigare idag än förr?","Maskiner och transporter har minskat den naturliga fysiska aktiviteten."],
+["Nämn en del av psykisk hälsa som träning kan hjälpa med.","Stresshantering, koncentration, minne eller självförtroende."]
+];
+let i=0,s=0,answered=false;
+function start(){document.getElementById("start").className="hide";document.getElementById("quiz").className="";show()}
+function show(){answered=false;let x=qs[i];document.getElementById("nr").textContent="Fråga "+(i+1)+" av "+qs.length;document.getElementById("q").textContent=x[0];let a=document.getElementById("a");a.innerHTML="";let inp=document.getElementById("text");inp.value="";
+let fill=[2,3,4,5,10,11,12,13,14].includes(i);if(fill){inp.className="";}else{inp.className="hide";["Ja, det hjälper kroppen enligt texten.","Det har ingen betydelse.","Det gäller bara elitidrottare.","Det påverkar bara social hälsa."].sort(()=>Math.random()-.5).forEach(t=>{let b=document.createElement("button");b.className="opt";b.textContent=t;b.onclick=()=>{document.querySelectorAll(".opt").forEach(z=>z.dataset.sel="");b.dataset.sel="1"};a.appendChild(b)})}}
+function next(){if(answered)return;let correct=qs[i][1].toLowerCase(),r=document.getElementById("text").value.toLowerCase();let sel=document.querySelector(".opt[data-sel='1']");if(sel)r=sel.textContent.toLowerCase();if(r.length>5&&correct.split(/\W+/).filter(w=>w.length>3).some(w=>r.includes(w)))s++;answered=true;i++;if(i<qs.length)show();else{document.getElementById("quiz").className="hide";document.getElementById("result").className="";document.getElementById("score").textContent="Du fick "+s+" av "+qs.length+" rätt!"}}
+</script></body></html>
